@@ -1,31 +1,36 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Data : MonoBehaviour
 {
-    // Start is called before the first frame update
     int[] array;
-
-    void Awake()
+    public int[] Array
     {
-        if (FindObjectsOfType<Data>().Length>1) 
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(this);
-    }
-
-    public int[] Array 
-    {
-        get 
+        get
         {
             return array;
         }
     }
 
+    void Awake()
+    {
+        //Check that Data not regenerated
+        gameObject.name = gameObject.name + " " + PlayerPrefs.GetInt("number");
+        PlayerPrefs.SetInt("number", PlayerPrefs.GetInt("number") + 1);
+
+        //Delete copies of Data and make original static
+        if (FindObjectsOfType<Data>().Length > 1)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+        }
+    }
+
+
     private void Start()
     {
-        array = new int[] {1,23,2};
+        array = new int[] { 1, 23, 2, PlayerPrefs.GetInt("number") };
     }
 }

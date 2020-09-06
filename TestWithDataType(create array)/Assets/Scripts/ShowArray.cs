@@ -1,17 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class ShowArray : MonoBehaviour
 {
-    TextMeshProUGUI text;
+    public TextMeshProUGUI text;
     private void Start()
     {
         text = GetComponent<TextMeshProUGUI>();
+        text.text = "";
     }
     public void Text_update()
     {
-        text.text = FindObjectOfType<Data>().Array[0].ToString();
+        text.text = "";
+        for (int i = 0; i < FindObjectOfType<Data>().Array.Length; i++)
+        {
+            text.text += FindObjectOfType<Data>().Array[i].ToString()+" ";
+        }
     }
 }

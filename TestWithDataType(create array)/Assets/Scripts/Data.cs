@@ -5,10 +5,14 @@ using UnityEngine;
 public class Data : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int[] array;
+    int[] array;
 
     void Awake()
     {
+        if (FindObjectsOfType<Data>().Length>1) 
+        {
+            Destroy(gameObject);
+        }
         DontDestroyOnLoad(this);
     }
 
@@ -23,11 +27,5 @@ public class Data : MonoBehaviour
     private void Start()
     {
         array = new int[] {1,23,2};
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
